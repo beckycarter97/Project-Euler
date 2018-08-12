@@ -14,7 +14,7 @@ def nth_prime(n):
 
     primes_found = 2
     test = 5
-    largest_prime = 5
+    largest_prime = 3
 
     while primes_found < n:
         if is_prime(test):
@@ -25,7 +25,7 @@ def nth_prime(n):
 
         if is_prime(test + 2):
             primes_found += 1
-            largest_prime = test
+            largest_prime = test + 2
 
         test += 6
 
