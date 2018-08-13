@@ -35,3 +35,69 @@ long_num = ("73167176531330624919225119674426574742355349194934969835203127745"
 # and then compare with current best
 
 # So need a good sorting algorithm
+
+
+def bubble_sort(list):
+    for limit in range(len(list) - 1, 0, -1):
+        for i in range(0, limit):
+            if list[i] > list[i+1]:
+                temp = list[i]
+                list[i] = list[i+1]
+                list[i+1] = temp
+
+    return list
+
+
+def get_sorted_integer_array(i, n):
+    integer_array = []
+
+    for j in range(n):
+        integer_array.append(int(long_num[i+j]))
+
+    bubble_sort(integer_array)
+
+    return integer_array
+
+
+def is_greater_eq(list1, list2, list_len):
+    # Compares two sorted integer lists
+    for i in range(list_len):
+        if list1[i] < list2[i]:
+            return False
+    return True
+
+
+def largest_product(n):
+    print("Largest Product n = {}".format(n))
+    potential_greater_array = []
+    current_greatest_array = get_sorted_integer_array(0, n)
+    current_pos = 1
+
+    while current_pos < len(long_num) - n + 1:
+        # print(current_pos)
+        if long_num[current_pos+n-1] > long_num[current_pos-1]:
+            # When move along one digit in the number, the set of n digits
+            # looking at only varies by one number, so only compare these two
+            # to see if current move improves over previous. Only then do we
+            # compare to our overall greatest array
+            potential_greater_array = get_sorted_integer_array(current_pos, n)
+            if is_greater_eq(potential_greater_array,
+                             current_greatest_array, n):
+                current_greatest_array = potential_greater_array
+
+        current_pos += 1
+
+    largest_product = 1
+
+    for i in range(n):
+        largest_product *= current_greatest_array[i]
+
+    return largest_product
+
+
+def main():
+    print(largest_product(13))
+
+
+if __name__ == '__main__':
+    main()
