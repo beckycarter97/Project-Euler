@@ -9,7 +9,9 @@ def is_prime(n):
                     3- All primes > 3 can be written in form 6k +- 1
                     4- Any number n can have only one primefactor > sqrt(n) """
 
-    if n == 1 or n < 4:
+    if n == 1:
+        return False
+    elif n < 4:
         return True
 
     elif n % 2 == 0:
@@ -34,3 +36,33 @@ def is_prime(n):
         test += 6
 
     return True
+
+
+def yield_primes(number):
+    """Yields primes bigger than or equal to number"""
+    while True:
+        if is_prime(number):
+            yield number
+
+
+def sum_sieve_erasthones(limit):
+    """Uses Sieve of Erasthones to generate all primes from 2 to n, and return
+    their sum"""
+    sieve_bound = math.ceil((limit - 1)/2)
+    sieve = []
+    for i in range(sieve_bound):
+        sieve.append(False)
+
+    cross_limit = math.ceil((math.ceil(limit) - 1) / 2)
+    for i in range(1, cross_limit):
+        if not sieve[i]:
+            # 2i + 1 is prime, so mark all multiples
+            for j in range(2*i*(i+1), sieve_bound, 2*i+1):
+                sieve[j] = True
+
+    sum = 2  # 2 is prime
+    for i in range(1, sieve_bound):
+        if not sieve[i]:
+            sum += 2*i + 1
+
+    return sum
