@@ -38,6 +38,17 @@ def is_prime(n):
     return True
 
 
+def bubble_sort(list):
+    for limit in range(len(list) - 1, 0, -1):
+        for i in range(0, limit):
+            if list[i] > list[i+1]:
+                temp = list[i]
+                list[i] = list[i+1]
+                list[i+1] = temp
+
+    return list
+
+
 def yield_primes(number):
     """Yields primes bigger than or equal to number"""
     while True:
