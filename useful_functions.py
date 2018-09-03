@@ -56,24 +56,31 @@ def yield_primes(number):
             yield number
 
 
-def sum_sieve_erasthones(limit):
+def sum_sieve_erasthones(n):
     """Uses Sieve of Erasthones to generate all primes from 2 to n, and return
     their sum"""
-    sieve_bound = math.ceil((limit - 1)/2)
+    cross_limit = math.ceil(math.sqrt(n))
     sieve = []
-    for i in range(sieve_bound):
+    for i in range(n):
         sieve.append(False)
 
-    cross_limit = math.ceil((math.ceil(limit) - 1) / 2)
-    for i in range(1, cross_limit):
-        if not sieve[i]:
-            # 2i + 1 is prime, so mark all multiples
-            for j in range(2*i*(i+1), sieve_bound, 2*i+1):
-                sieve[j] = True
+    for k in range(4, n, 2):
+        # All even numbers are not prime
+        sieve[k] = True
 
-    sum = 2  # 2 is prime
-    for i in range(1, sieve_bound):
-        if not sieve[i]:
-            sum += 2*i + 1
+    for k in range(3, cross_limit, 2):
+        if not sieve[k]:
+            # n is not marked, so is prime
+            for m in range(k*k, n, 2*k):
+                # Mark all odd multiples of k as not prime, start at k*k
+                # because for any r < k, r has a prime factor s < k, and so r*k
+                # is a multiple of s, so will already be marked as not prime.
+                # Similarly all even multiples are already marked as not prime.
+                sieve[m] = True
+    sum = 0
+    for k in range(2, n):
+        if not sieve[k]:
+            # k is prime
+            sum += k
 
     return sum
