@@ -78,7 +78,7 @@ def largest_left_diag_prod(grid, current_greatest_prod, n):
             # print("col: {} row: {}\n".format(current_col, current_row))
             current_prod = 1
             for i in range(n):
-                current_prod *= grid[current_row - i][current_col - i]
+                current_prod *= grid[current_row + i][current_col - i]
 
             if current_prod > current_greatest_prod:
                 current_greatest_prod = current_prod
@@ -93,7 +93,7 @@ def largest_left_diag_prod(grid, current_greatest_prod, n):
 
 def main():
     grid = []
-    with open('prob11gridcut.txt') as f:
+    with open('prob11grid.txt') as f:
         for line in f:
             line = line.rstrip('\n')
             grid.append(list(map(int, line.split())))
