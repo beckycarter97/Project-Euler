@@ -1,4 +1,4 @@
-# Problem 10
+# Problem 11
 """ Find the greatest product of four adjacent numbers (up, down, left, right,
 or diagonally) in 20x20 grid """
 
@@ -93,7 +93,7 @@ def largest_left_diag_prod(grid, current_greatest_prod, n):
 
 def main():
     grid = []
-    with open('prob10grid.txt') as f:
+    with open('prob11gridcut.txt') as f:
         for line in f:
             line = line.rstrip('\n')
             grid.append(list(map(int, line.split())))
@@ -112,6 +112,7 @@ def main():
 
     return
 # Gives the wrong answer, but not sure what's wrong :/
+
 
 if __name__ == '__main__':
     main()
