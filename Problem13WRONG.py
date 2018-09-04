@@ -4,6 +4,12 @@
 # THIS VERSION DOES NOT WORK
 # Have kept because I think the add_carry function is actually quite good,
 # and that does work, and also just for reference
+# It does work with pretty high probability though - the likelihood of the
+# 13th digit sum affect the first 10 digits of the sum, is quite small
+# and the probability of the nth digit (n > 11) affecting the first 10 digits
+# decreases as n increases. So it will probably work, but not for certain
+# The idea is probably more useful for longer numbers, where calculating the
+# whole sum would be impractical.
 
 
 def add_carry(sum_digits, carry, index, extended=False):
