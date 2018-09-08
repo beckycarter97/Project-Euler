@@ -49,12 +49,13 @@ def read_in_triangle():
 def fill_in_row(triangle_row, path_triangle_prev_row):
     next_path_row = []
 
-    # First element in row can only be reached by the first element in row above
-    next_path_row.append(triangle_row[0] + path_triangle_prev_row[0])
+    # First element in row can only be reached by the first element in prev row
+    # next_path_row.append(triangle_row[0] + path_triangle_prev_row[0])
 
     cur_item = 1
     while cur_item < len(triangle_row) - 1:
-        # ith element can be reached from ith or (i-1)th element of prev row (0 < i < len(row))
+        # ith element can be reached from ith or (i-1)th element of prev row
+        # (0 < i < len(row))
         left_item = path_triangle_prev_row[cur_item-1]
         right_item = path_triangle_prev_row[cur_item]
 
@@ -67,7 +68,8 @@ def fill_in_row(triangle_row, path_triangle_prev_row):
 
     # last element can only be reached from last element of previous row
     # (which has index 1 smaller)
-    next_path_row.append(triangle_row[cur_item] + path_triangle_prev_row[cur_item -1])
+    next_path_row.append(triangle_row[cur_item] +
+                         path_triangle_prev_row[cur_item - 1])
 
     return next_path_row
 
@@ -78,10 +80,11 @@ def main():
     path_triangle = []
 
     path_triangle.append(triangle[0])
-    cur_row =1
+    cur_row = 1
 
     while cur_row < triangle_len:
-        next_path_row = fill_in_row(triangle[cur_row], path_triangle[cur_row -1])
+        next_path_row = fill_in_row(triangle[cur_row],
+                                    path_triangle[cur_row - 1])
         path_triangle.append(next_path_row)
         cur_row += 1
 
