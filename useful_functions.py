@@ -84,3 +84,30 @@ def sum_sieve_erasthones(n):
             sum += k
 
     return sum
+
+
+def factorial(n):
+    result = 1
+    for i in range(1, n+1):
+        result *= i
+
+    return result
+
+
+def get_factors(number):
+    """Finds all factors of a number (not just prime ones) and returns as
+    array"""
+    factors = []
+    limit = math.floor(math.sqrt(number))
+    factor = 1
+
+    while factor < limit:
+        if number % factor == 0:
+            second_factor = int(number/factor)
+            if not(factor in factors):
+                factors.append(factor)
+            if not (second_factor in factors):
+                factors.append(second_factor)
+
+        factor += 1
+    return factors
